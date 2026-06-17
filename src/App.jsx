@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import {
   Home, Building2, ShieldCheck, FileLock2, GraduationCap, UserCog,
-  Calendar, ClipboardCheck, Folder, User, LogOut
+  Calendar, ClipboardCheck, Folder, User, LogOut, Menu
 } from 'lucide-react';
 import { supabase, audit } from './lib/supabase.js';
 import { palette, fontStack } from './lib/design.js';
 import { content } from './content.js';
-import { LoadingFull } from './components/UI.jsx';
+import { LoadingFull, useIsMobile } from './components/UI.jsx';
 import { SignIn, ForgotPassword, SetNewPassword } from './views/Auth.jsx';
 import {
   Dashboard, CentreDetails, EqaCriteria, Policies, Learners, Staff,
@@ -31,6 +31,8 @@ export default function App() {
   const [authReady, setAuthReady] = useState(false);
   const [authView, setAuthView] = useState('signin'); // signin | forgot | reset
   const [view, setView] = useState('dashboard');
+  const isMobile = useIsMobile();
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
     // Detect ?reset=1 in URL → user just clicked the reset email link
@@ -96,6 +98,7 @@ export default function App() {
       fontFamily: fontStack.body,
       color: palette.ink,
       display: 'flex',
+      flexDirection: isMobile ? 'column' : 'row',
     }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
@@ -105,7 +108,41 @@ export default function App() {
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: ${palette.parchmentDark}; }
         ::-webkit-scrollbar-thumb { background: ${palette.ash}; border-radius: 0; }
+        .sh-table > div { min-width: 720px; }
+        @media (max-width: 768px) {
+          .sh-modal-overlay { padding: 24px 12px !important; }
+          .sh-page-title { font-size: 25px !important; }
+        }
       `}</style>
+
+      {/* MOBILE TOP BAR */}
+      {isMobile && (
+        <header style={{
+          position: 'sticky', top: 0, zIndex: 50,
+          display: 'flex', alignItems: 'center', gap: 12,
+          padding: '12px 16px',
+          background: palette.tealDeep, color: palette.parchment,
+          borderBottom: `1px solid ${palette.line}`,
+        }}>
+          <button onClick={() => setDrawerOpen(true)} aria-label="Open menu" style={{
+            background: 'transparent', border: 'none', color: palette.gold,
+            cursor: 'pointer', padding: 4, display: 'flex',
+          }}>
+            <Menu size={24} strokeWidth={1.75} />
+          </button>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 8, letterSpacing: '0.25em', textTransform: 'uppercase', color: palette.gold, fontFamily: fontStack.mono }}>{content.brand.org}</div>
+            <div style={{ fontSize: 15, fontFamily: fontStack.display, fontWeight: 500, lineHeight: 1.1, color: palette.parchment, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{content.brand.appName}</div>
+          </div>
+        </header>
+      )}
+
+      {/* DRAWER BACKDROP (mobile) */}
+      {isMobile && drawerOpen && (
+        <div onClick={() => setDrawerOpen(false)} style={{
+          position: 'fixed', inset: 0, background: 'rgba(11,29,36,0.55)', zIndex: 60,
+        }} />
+      )}
 
       {/* SIDEBAR */}
       <aside style={{
@@ -113,12 +150,17 @@ export default function App() {
         background: palette.tealDeep,
         color: palette.parchment,
         padding: '32px 0',
-        position: 'sticky',
-        top: 0,
-        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         borderRight: `1px solid ${palette.line}`,
+        ...(isMobile ? {
+          position: 'fixed', top: 0, left: 0, height: '100vh', zIndex: 70,
+          transform: drawerOpen ? 'translateX(0)' : 'translateX(-100%)',
+          transition: 'transform 0.25s ease',
+          boxShadow: drawerOpen ? '0 0 50px rgba(0,0,0,0.5)' : 'none',
+        } : {
+          position: 'sticky', top: 0, height: '100vh',
+        }),
       }}>
         <div style={{ padding: '0 24px 24px', borderBottom: `1px solid ${palette.line}` }}>
           <div style={{
@@ -157,7 +199,7 @@ export default function App() {
             return (
               <button
                 key={item.id}
-                onClick={() => setView(item.id)}
+                onClick={() => { setView(item.id); setDrawerOpen(false); }}
                 style={{
                   width: '100%',
                   background: active ? palette.teal : 'transparent',
@@ -247,7 +289,7 @@ export default function App() {
       </aside>
 
       {/* MAIN */}
-      <main style={{ flex: 1, padding: '48px 56px', maxWidth: '100%', overflow: 'hidden' }}>
+      <main style={{ flex: 1, padding: isMobile ? '28px 16px' : '48px 56px', maxWidth: '100%', overflow: 'hidden', width: isMobile ? '100%' : 'auto' }}>
         {view === 'dashboard' && <Dashboard setView={setView} />}
         {view === 'centre' && <CentreDetails />}
         {view === 'eqa' && <EqaCriteria />}

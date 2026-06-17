@@ -24,9 +24,9 @@ export const content = {
   //  BRANDING  — appears on the sign-in screen AND the sidebar
   // ==========================================================================
   brand: {
-    org:     "Safe Haven-A Ray of Hope",            // small text above the big title
-    appName: "Education and Training",   // the big title
-    tagline: "NCFE Operations Hub",         // small italic line under the title (sidebar only)
+    org:     "Safe Haven",            // small text above the big title
+    appName: "NCFE Operations Hub",   // the big title
+    tagline: "A Ray of Hope",         // small italic line under the title (sidebar only)
   },
 
   // ==========================================================================

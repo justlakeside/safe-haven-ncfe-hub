@@ -527,7 +527,7 @@ export const Policies = () => {
       {items.length === 0 ? (
         <Empty icon={FileLock2} title="No policies registered" hint="Add your first policy to begin building the register" />
       ) : (
-        <div style={{ background: palette.parchment, borderTop: `2px solid ${palette.teal}` }}>
+        <div className="sh-table" style={{ background: palette.parchment, borderTop: `2px solid ${palette.teal}`, overflowX: 'auto' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '2fr 80px 1.2fr 1fr 100px 80px', padding: '12px 18px', background: palette.tealDeep, color: palette.parchment, fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: fontStack.mono }}>
             <div>Policy</div><div>Version</div><div>Owner</div><div>Next Review</div><div>Status</div><div></div>
           </div>
@@ -656,7 +656,7 @@ export const Learners = () => {
       {filtered.length === 0 ? (
         <Empty icon={GraduationCap} title="No learners registered" hint={items.length === 0 ? 'Add your first learner to begin' : 'No learners match your search'} />
       ) : (
-        <div style={{ background: palette.parchment, borderTop: `2px solid ${palette.teal}` }}>
+        <div className="sh-table" style={{ background: palette.parchment, borderTop: `2px solid ${palette.teal}`, overflowX: 'auto' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '100px 1.5fr 1.5fr 1fr 80px 100px 90px 60px', padding: '12px 18px', background: palette.tealDeep, color: palette.parchment, fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: fontStack.mono }}>
             <div>Ref</div><div>Name</div><div>Qualification</div><div>Tutor</div><div>ID</div><div>Progress</div><div>Status</div><div></div>
           </div>
@@ -807,7 +807,7 @@ export const Staff = () => {
       {items.length === 0 ? (
         <Empty icon={UserCog} title="No staff registered" hint="Add staff records to track competency, DBS, and CPD" />
       ) : (
-        <div style={{ background: palette.parchment, borderTop: `2px solid ${palette.teal}` }}>
+        <div className="sh-table" style={{ background: palette.parchment, borderTop: `2px solid ${palette.teal}`, overflowX: 'auto' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1.5fr 1fr 100px 80px 80px 60px', padding: '12px 18px', background: palette.tealDeep, color: palette.parchment, fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: fontStack.mono }}>
             <div>Name</div><div>Role</div><div>DBS</div><div>CPD Hrs</div><div>RTW</div><div>COI</div><div></div>
           </div>
@@ -955,7 +955,7 @@ export const ExamSessions = () => {
       {items.length === 0 ? (
         <Empty icon={Calendar} title="No exam sessions logged" hint="Create your first session record" />
       ) : (
-        <div style={{ background: palette.parchment, borderTop: `2px solid ${palette.teal}` }}>
+        <div className="sh-table" style={{ background: palette.parchment, borderTop: `2px solid ${palette.teal}`, overflowX: 'auto' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '120px 100px 2fr 1fr 1fr 80px 100px', padding: '12px 18px', background: palette.tealDeep, color: palette.parchment, fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: fontStack.mono }}>
             <div>Ref</div><div>Date</div><div>Qualification</div><div>Room</div><div>Invigilator</div><div>Cands.</div><div></div>
           </div>
@@ -1101,7 +1101,7 @@ export const IQA = () => {
       {items.length === 0 ? (
         <Empty icon={ClipboardCheck} title="No IQA samples logged" hint="Record your first sampling decision" />
       ) : (
-        <div style={{ background: palette.parchment, borderTop: `2px solid ${palette.teal}` }}>
+        <div className="sh-table" style={{ background: palette.parchment, borderTop: `2px solid ${palette.teal}`, overflowX: 'auto' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '100px 100px 1fr 1fr 1fr 100px 80px 60px', padding: '12px 18px', background: palette.tealDeep, color: palette.parchment, fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: fontStack.mono }}>
             <div>Ref</div><div>Date</div><div>Learner</div><div>Assessor</div><div>IQA</div><div>Decision</div><div>Closed</div><div></div>
           </div>

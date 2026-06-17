@@ -1,5 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { palette, fontStack } from '../lib/design.js';
+
+// Detects a phone-sized screen so layouts can adapt.
+export function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth < breakpoint : false
+  );
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < breakpoint);
+    onResize();
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, [breakpoint]);
+  return isMobile;
+}
 
 export const Pill = ({ children, tone = 'neutral' }) => {
   const tones = {
@@ -84,7 +98,7 @@ export const Select = (props) => (
 export const Modal = ({ open, onClose, title, children, width = 640 }) => {
   if (!open) return null;
   return (
-    <div style={{
+    <div className="sh-modal-overlay" style={{
       position: 'fixed', inset: 0, background: 'rgba(11,29,36,0.55)',
       display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
       padding: '60px 20px', zIndex: 100, overflowY: 'auto',
@@ -112,7 +126,7 @@ export const SectionHeader = ({ eyebrow, title, description, actions }) => (
   }}>
     <div>
       <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: palette.gold, marginBottom: 8, fontFamily: fontStack.mono }}>{eyebrow}</div>
-      <h2 style={{ margin: 0, fontSize: 32, fontFamily: fontStack.display, fontWeight: 500, color: palette.ink, letterSpacing: '-0.01em', lineHeight: 1.1 }}>{title}</h2>
+      <h2 className="sh-page-title" style={{ margin: 0, fontSize: 32, fontFamily: fontStack.display, fontWeight: 500, color: palette.ink, letterSpacing: '-0.01em', lineHeight: 1.1 }}>{title}</h2>
       {description && <p style={{ margin: '10px 0 0', fontSize: 14, color: palette.ink, opacity: 0.75, fontFamily: fontStack.body, maxWidth: 720 }}>{description}</p>}
     </div>
     {actions && <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>{actions}</div>}
