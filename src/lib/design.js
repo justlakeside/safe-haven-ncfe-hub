@@ -10,8 +10,8 @@
 // ============================================================================
 export const palette = {
   ink:           '#0B1D24',  // main dark text colour (almost-black)
-  teal:          '#14464F',  // primary buttons, the highlighted menu item, "Sign In" button
-  tealDeep:      '#0E3239',  // darkest colour — the sidebar background, table header rows, sign-in background
+  teal:          '#000000',  // primary buttons, the highlighted menu item, "Sign In" button
+  tealDeep:      '#000000',  // darkest colour — the sidebar background, table header rows, sign-in background
   gold:          '#B8893C',  // gold accents — the small UPPERCASE labels, borders, the lock icon
   goldSoft:      '#D4A95B',  // lighter gold — text in the sidebar footer, the big readiness % number
   parchment:     '#F5EFE4',  // the main cream page background
