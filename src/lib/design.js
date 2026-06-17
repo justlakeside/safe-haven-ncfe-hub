@@ -1,7 +1,7 @@
 export const palette = {
   ink: '#0B1D24',
   teal: '#000000',
-  tealDeep: '#0E3239',
+  tealDeep: '#000000',
   gold: '#B8893C',
   goldSoft: '#D4A95B',
   parchment: '#F5EFE4',
