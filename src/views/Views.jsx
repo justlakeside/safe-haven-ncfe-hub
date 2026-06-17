@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { supabase, audit } from '../lib/supabase.js';
 import { palette, fontStack, formatDate, formatDateTime } from '../lib/design.js';
+import { content } from '../content.js';
 import {
   Pill, Button, Field, Input, Textarea, Select, Modal, SectionHeader, Empty, Spinner, LoadingFull
 } from '../components/UI.jsx';
@@ -62,9 +63,9 @@ export const Dashboard = ({ setView }) => {
   return (
     <div>
       <SectionHeader
-        eyebrow="Operations Hub"
-        title="Centre Approval Readiness"
-        description="Progress across the 24 EQA criteria. Six criteria are pre-marked Not Applicable based on the qualifications in scope. All data is stored in your secure Supabase backend."
+        eyebrow={content.pages.dashboard.eyebrow}
+        title={content.pages.dashboard.title}
+        description={content.pages.dashboard.description}
       />
 
       <div style={{ background: `linear-gradient(135deg, ${palette.tealDeep} 0%, ${palette.teal} 100%)`, padding: '36px 40px', borderRadius: 2, marginBottom: 28, color: palette.parchment, position: 'relative', overflow: 'hidden' }}>
@@ -201,9 +202,9 @@ export const CentreDetails = () => {
   return (
     <div>
       <SectionHeader
-        eyebrow="Section 1"
-        title="Centre Details & Contacts"
-        description="Official centre information and key role-holders for NCFE registration. Update names here whenever a role changes, and reflect the change formally via NCFE's Change of Centre Contact Details form (criterion 3.19)."
+        eyebrow={content.pages.centre.eyebrow}
+        title={content.pages.centre.title}
+        description={content.pages.centre.description}
       />
 
       <div style={{ background: palette.parchment, padding: '24px 28px', marginBottom: 24, borderLeft: `3px solid ${palette.gold}` }}>
@@ -248,7 +249,7 @@ export const CentreDetails = () => {
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 16 }}>
         <h3 style={{ margin: 0, fontSize: 18, fontFamily: fontStack.display, color: palette.ink, fontWeight: 500 }}>Key Contacts</h3>
-        <Button size="sm" icon={Plus} onClick={() => setEditing({ role: '', name: '', email: '', phone: '' })}>Add Contact</Button>
+        <Button size="sm" icon={Plus} onClick={() => setEditing({ role: '', name: '', email: '', phone: '' })}>{content.buttons.addContact}</Button>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 14 }}>
@@ -350,9 +351,9 @@ export const EqaCriteria = () => {
   return (
     <div>
       <SectionHeader
-        eyebrow="Section 3 (24 Criteria)"
-        title="EQA Review Criteria"
-        description="Each criterion from the NCFE Centre Approval Report. Click any criterion to expand it, log evidence references, attach supporting documents, and record status."
+        eyebrow={content.pages.eqa.eyebrow}
+        title={content.pages.eqa.title}
+        description={content.pages.eqa.description}
         actions={
           <Select value={filter} onChange={e => setFilter(e.target.value)} style={{ width: 200 }}>
             <option value="applicable">Applicable only</option>
@@ -517,10 +518,10 @@ export const Policies = () => {
   return (
     <div>
       <SectionHeader
-        eyebrow="Compliance"
-        title="Policy Register"
-        description="The 16 senior-management-supported policies required by criterion 3.1 are pre-loaded. Open each to record version, owner, review dates, and upload the actual document."
-        actions={<Button icon={Plus} onClick={() => setEditing({ title: '', version: '1.0', owner: '', status: 'draft', linked_clause: '' })}>Add Policy</Button>}
+        eyebrow={content.pages.policies.eyebrow}
+        title={content.pages.policies.title}
+        description={content.pages.policies.description}
+        actions={<Button icon={Plus} onClick={() => setEditing({ title: '', version: '1.0', owner: '', status: 'draft', linked_clause: '' })}>{content.buttons.addPolicy}</Button>}
       />
 
       {items.length === 0 ? (
@@ -638,16 +639,16 @@ export const Learners = () => {
   return (
     <div>
       <SectionHeader
-        eyebrow="Learner Management"
-        title="Learner Records"
-        description="Enrolment tracking, ID verification, qualification progress, and per-learner document storage (ID scans, enrolment forms, assessment evidence)."
+        eyebrow={content.pages.learners.eyebrow}
+        title={content.pages.learners.title}
+        description={content.pages.learners.description}
         actions={
           <>
             <div style={{ position: 'relative' }}>
               <Search size={13} style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: palette.ash }} />
               <Input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search name or ref..." style={{ width: 220, paddingLeft: 30 }} />
             </div>
-            <Button icon={Plus} onClick={() => setEditing({ learner_ref: '', name: '', status: 'enquiry', progress: 0, id_verified: false, rpl_considered: false })}>Add Learner</Button>
+            <Button icon={Plus} onClick={() => setEditing({ learner_ref: '', name: '', status: 'enquiry', progress: 0, id_verified: false, rpl_considered: false })}>{content.buttons.addLearner}</Button>
           </>
         }
       />
@@ -790,10 +791,10 @@ export const Staff = () => {
   return (
     <div>
       <SectionHeader
-        eyebrow="Human Resources"
-        title="Staff Register"
-        description="Competency, right-to-work, DBS, CPD records, plus per-staff document storage (CV, DBS certificate, qualifications, contract). Supports criteria 3.3–3.6."
-        actions={<Button icon={Plus} onClick={() => setEditing({ name: '', role: '', cpd_hours: 0, right_to_work: false, conflict_check: false })}>Add Staff</Button>}
+        eyebrow={content.pages.staff.eyebrow}
+        title={content.pages.staff.title}
+        description={content.pages.staff.description}
+        actions={<Button icon={Plus} onClick={() => setEditing({ name: '', role: '', cpd_hours: 0, right_to_work: false, conflict_check: false })}>{content.buttons.addStaff}</Button>}
       />
 
       {conflicts.length > 0 && (
@@ -945,10 +946,10 @@ export const ExamSessions = () => {
   return (
     <div>
       <SectionHeader
-        eyebrow="Secure Assessment"
-        title="Exam Session Log"
-        description="JCQ-compliant session records with attendance registers and ID verification audit trail. Supports criteria 3.14 and 3.15."
-        actions={<Button icon={Plus} onClick={() => setEditing({})}>New Session</Button>}
+        eyebrow={content.pages.exams.eyebrow}
+        title={content.pages.exams.title}
+        description={content.pages.exams.description}
+        actions={<Button icon={Plus} onClick={() => setEditing({})}>{content.buttons.newSession}</Button>}
       />
 
       {items.length === 0 ? (
@@ -1091,10 +1092,10 @@ export const IQA = () => {
   return (
     <div>
       <SectionHeader
-        eyebrow="Quality Assurance"
-        title="IQA Sampling Log"
-        description="Internal Quality Assurance decisions, feedback to assessors, and action tracking. Supports criterion 3.12."
-        actions={<Button icon={Plus} onClick={() => setEditing({ decision: 'agreed', closed: false })}>New Sample</Button>}
+        eyebrow={content.pages.iqa.eyebrow}
+        title={content.pages.iqa.title}
+        description={content.pages.iqa.description}
+        actions={<Button icon={Plus} onClick={() => setEditing({ decision: 'agreed', closed: false })}>{content.buttons.newSample}</Button>}
       />
 
       {items.length === 0 ? (
@@ -1174,9 +1175,9 @@ export const IQA = () => {
 export const GeneralDocs = () => (
   <div>
     <SectionHeader
-      eyebrow="General Repository"
-      title="NCFE Documents Library"
-      description="A central place for documents that don't belong to a specific learner or staff member: official NCFE communications, qualification specifications, JCQ documents, brand guidelines, photographs of premises, certificates, and so on."
+      eyebrow={content.pages.docs.eyebrow}
+      title={content.pages.docs.title}
+      description={content.pages.docs.description}
     />
     <DocumentManager category="general" title="" />
   </div>
@@ -1220,7 +1221,7 @@ export const Account = () => {
 
   return (
     <div>
-      <SectionHeader eyebrow="Account" title="Your Account" description="Sign-in details and password management." />
+      <SectionHeader eyebrow={content.pages.account.eyebrow} title={content.pages.account.title} description={content.pages.account.description} />
 
       <div style={{ background: palette.parchment, padding: '24px 28px', marginBottom: 24, borderLeft: `3px solid ${palette.gold}` }}>
         <div style={{ fontSize: 9, letterSpacing: '0.15em', textTransform: 'uppercase', color: palette.ash, fontFamily: fontStack.mono, marginBottom: 4 }}>Signed in as</div>

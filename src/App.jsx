@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { supabase, audit } from './lib/supabase.js';
 import { palette, fontStack } from './lib/design.js';
+import { content } from './content.js';
 import { LoadingFull } from './components/UI.jsx';
 import { SignIn, ForgotPassword, SetNewPassword } from './views/Auth.jsx';
 import {
@@ -13,16 +14,16 @@ import {
 } from './views/Views.jsx';
 
 const NAV = [
-  { id: 'dashboard', label: 'Overview', icon: Home },
-  { id: 'centre', label: 'Centre Details', icon: Building2 },
-  { id: 'eqa', label: 'EQA Criteria', icon: ShieldCheck },
-  { id: 'policies', label: 'Policies', icon: FileLock2 },
-  { id: 'learners', label: 'Learners', icon: GraduationCap },
-  { id: 'staff', label: 'Staff', icon: UserCog },
-  { id: 'exams', label: 'Exam Sessions', icon: Calendar },
-  { id: 'iqa', label: 'IQA Sampling', icon: ClipboardCheck },
-  { id: 'docs', label: 'Documents', icon: Folder },
-  { id: 'account', label: 'Account', icon: User },
+  { id: 'dashboard', label: content.nav.dashboard, icon: Home },
+  { id: 'centre', label: content.nav.centre, icon: Building2 },
+  { id: 'eqa', label: content.nav.eqa, icon: ShieldCheck },
+  { id: 'policies', label: content.nav.policies, icon: FileLock2 },
+  { id: 'learners', label: content.nav.learners, icon: GraduationCap },
+  { id: 'staff', label: content.nav.staff, icon: UserCog },
+  { id: 'exams', label: content.nav.exams, icon: Calendar },
+  { id: 'iqa', label: content.nav.iqa, icon: ClipboardCheck },
+  { id: 'docs', label: content.nav.docs, icon: Folder },
+  { id: 'account', label: content.nav.account, icon: User },
 ];
 
 export default function App() {
@@ -128,7 +129,7 @@ export default function App() {
             marginBottom: 6,
             fontFamily: fontStack.mono,
           }}>
-            Safe Haven
+            {content.brand.org}
           </div>
           <div style={{
             fontSize: 19,
@@ -137,7 +138,7 @@ export default function App() {
             lineHeight: 1.15,
             color: palette.parchment,
           }}>
-            NCFE Operations Hub
+            {content.brand.appName}
           </div>
           <div style={{
             fontSize: 10,
@@ -146,7 +147,7 @@ export default function App() {
             fontStyle: 'italic',
             fontFamily: fontStack.body,
           }}>
-            A Ray of Hope
+            {content.brand.tagline}
           </div>
         </div>
 
@@ -289,7 +290,7 @@ function BootScreen() {
           color: palette.goldSoft,
           fontFamily: fontStack.mono,
         }}>
-          Safe Haven NCFE Hub
+          {content.brand.org} {content.brand.appName}
         </div>
       </div>
     </div>

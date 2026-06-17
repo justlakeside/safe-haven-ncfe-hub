@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Lock, KeyRound, AlertTriangle, Mail, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { supabase, audit } from '../lib/supabase.js';
 import { palette, fontStack } from '../lib/design.js';
+import { content } from '../content.js';
 import { Field, Input, Spinner } from '../components/UI.jsx';
 
 const AuthShell = ({ subtitle, children }) => (
@@ -27,8 +28,8 @@ const AuthShell = ({ subtitle, children }) => (
         <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 56, height: 56, background: palette.tealDeep, borderRadius: '50%', marginBottom: 16, border: `2px solid ${palette.gold}` }}>
           <Lock size={22} color={palette.gold} strokeWidth={1.75} />
         </div>
-        <div style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: palette.gold, marginBottom: 8, fontFamily: fontStack.mono }}>Safe Haven</div>
-        <h1 style={{ margin: 0, fontSize: 28, fontFamily: fontStack.display, fontWeight: 500, color: palette.ink, lineHeight: 1.15 }}>NCFE Operations Hub</h1>
+        <div style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: palette.gold, marginBottom: 8, fontFamily: fontStack.mono }}>{content.brand.org}</div>
+        <h1 style={{ margin: 0, fontSize: 28, fontFamily: fontStack.display, fontWeight: 500, color: palette.ink, lineHeight: 1.15 }}>{content.brand.appName}</h1>
         <p style={{ margin: '10px 0 0', fontSize: 12, color: palette.ash, fontStyle: 'italic' }}>{subtitle}</p>
       </div>
       {children}
@@ -69,7 +70,7 @@ export const SignIn = ({ onForgot }) => {
   };
 
   return (
-    <AuthShell subtitle="Sign in to continue">
+    <AuthShell subtitle={content.signIn.subtitle}>
       <form onSubmit={handleSubmit}>
         <Field label="Email"><Input type="email" value={email} onChange={e => setEmail(e.target.value)} autoFocus required autoComplete="email" /></Field>
         <Field label="Password"><Input type="password" value={password} onChange={e => setPassword(e.target.value)} required autoComplete="current-password" /></Field>
@@ -85,7 +86,7 @@ export const SignIn = ({ onForgot }) => {
         <button type="button" onClick={onForgot} style={linkBtn}>Forgotten password?</button>
       </form>
       <div style={{ marginTop: 28, paddingTop: 16, borderTop: `1px solid ${palette.parchmentDark}`, fontSize: 10, color: palette.ash, fontStyle: 'italic', textAlign: 'center', lineHeight: 1.5 }}>
-        Encrypted at rest · Audit logged · UK GDPR compliant infrastructure
+        {content.signIn.footer}
       </div>
     </AuthShell>
   );
